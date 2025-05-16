@@ -1,22 +1,28 @@
-from jarvis.read_file import *
-from jarvis.ollama_message import *
+from jarvis.llm_message import *
+from jarvis.read_config import *
+from jarvis.llm_message import *
 from jarvis.conmmand import *
-from jarvis.get_args import *
-    
-def main():
-    model_from_config = read_config()
-    model_from_arg, message, command_or_not = get_args()
-    if model_from_arg == '':
-        model = model_from_config
-    else:
-        model = model_from_arg
-    if command_or_not:
-        reapet = send_message(model, message)
-        conmmand(reapet)
-    else:
-        reapet = send_message_stream(model, message)
-        for chunk in reapet:
+from jarvis.get_input import *
+
+def llm_chat(provider, model, api_key):
+    while  True:
+        message = input('\n>>> ')
+        reapet_stream = llm_client(provider, model, api_key, message)
+        reapet_stream = reapet_stream.generate_stream()
+        for chunk in reapet_stream:
             print(chunk['message']['content'], end='', flush=True)
-        
-if __name__ == "__main__":
-    main()
+
+def main():
+    provider, model, api_key = read_config()
+    model, message, command_or_not = get_args(provider, model)
+    if command_or_not:
+        reapet = llm_client(provider,  model, api_key, message)
+        reapet = reapet.generate()
+        conmmand(reapet)
+    elif message != '':
+        reapet_stream = llm_client(provider, model, api_key, message)
+        reapet_stream = reapet_stream.generate_stream()
+        for chunk in reapet_stream:
+            print(chunk['message']['content'], end='', flush=True)
+    else:
+        llm_chat(provider, model, api_key)

@@ -1,2 +1,3 @@
-def main() -> None:
-    print("Hello from jarvis!")
+from jarvis.main import main
+if __name__ == "__main__":
+    main()

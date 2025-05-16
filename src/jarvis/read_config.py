@@ -10,8 +10,6 @@ def read_config():
     with open(config_file) as file:
         configration = yaml.safe_load(file)
         provider = configration['provider']
-        model = configration['model']
         api_key = configration['api_key']
+        model = configration['model']
     return provider, model, api_key
-        
-    
