@@ -2,18 +2,18 @@ from os import system
 from re import findall
 
 def cut_command(llm_feedback):
-    cuttied_conmmand = '\n'
+    cuttied_command = '\n'
     if 'bash' in llm_feedback:
-        cuttied_conmmand = findall(r"bash\n(.*?)\n", llm_feedback)
-        return cuttied_conmmand
+        cuttied_command = findall(r"bash\n(.*?)\n", llm_feedback)
+        return cuttied_command
     if '$' in llm_feedback:
         cuttied_conmmand = findall(r"\$\n(.*?)\n", llm_feedback)
-        return cuttied_conmmand
+        return cuttied_command
     if '```' in llm_feedback:
         cuttied_conmmand = findall(r"\`\`\`\n(.*?)\n", llm_feedback)
-        return cuttied_conmmand
+        return cuttied_command
     else:
-        return cuttied_conmmand
+        return cuttied_command
 
 def conmmand(llm_feedback):
     cutted_command = cut_command(llm_feedback)

@@ -1,6 +1,6 @@
 from jarvis.read_config import *
 from jarvis.llm_client import *
-from jarvis.conmmand import *
+from jarvis.command import *
 from jarvis.get_input import *
 
 def llm_chat(provider, model, api_key):
@@ -18,7 +18,7 @@ def main():
     if command_or_not:
         reapet = llm_client(provider,  model, api_key, message)
         reapet = reapet.generate()
-        conmmand(reapet)
+        command(reapet)
     elif message != '':
         reapet_stream = llm_client(provider, model, api_key, message)
         reapet_stream.generate_stream_print()
