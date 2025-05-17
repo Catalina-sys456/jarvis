@@ -20,5 +20,5 @@ def get_args(provider, model):
     elif args.file_name:   
         message = open_file(args.file_name)
     elif args.question:
-        message = args.word
+        message = args.question
     return model, message, command_or_not

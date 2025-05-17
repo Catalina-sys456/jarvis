@@ -1,7 +1,7 @@
 [project]
 name = "jarvis"
 version = "0.1.0"
-description = "Add your description here"
+description = "jarvis, a cli llm client"
 readme = "README.md"
 authors = [
     { name = "sccuhha" }
