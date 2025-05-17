@@ -1,0 +1,15 @@
+*jsrvis, a cli llm client
+
+	usage: jarvis [-h] [-f FILE_NAME] [-w WORD] [-p PROVIDER] [-m MODEL] [-c COMMAND]
+
+	options:
+	-h, --help            show this help message and exit
+	-f FILE_NAME, --file_name FILE_NAME
+                        send a file to llm
+	-w WORD, --word WORD  ask llm a question
+	-p PROVIDER, --provider PROVIDER
+                        change the provider
+	-m MODEL, --model MODEL
+                        change a model
+	-c COMMAND, --command COMMAND
+                        let llm gennerate commands
