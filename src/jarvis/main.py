@@ -1,17 +1,17 @@
-from jarvis.llm_message import *
 from jarvis.read_config import *
-from jarvis.llm_message import *
+from jarvis.llm_client import *
 from jarvis.conmmand import *
 from jarvis.get_input import *
 
 def llm_chat(provider, model, api_key):
     while  True:
-        message = input('\n>>> ')
-        reapet_stream = llm_client(provider, model, api_key, message)
-        reapet_stream = reapet_stream.generate_stream()
-        for chunk in reapet_stream:
-            print(chunk['message']['content'], end='', flush=True)
-
+        try:
+            message = input('\n\n\n>>> ')
+            reapet_stream = llm_client(provider, model, api_key, message)
+            reapet_stream.generate_stream_print()
+        except EOFError:
+            break
+            
 def main():
     provider, model, api_key = read_config()
     model, message, command_or_not = get_args(provider, model)
@@ -21,8 +21,6 @@ def main():
         conmmand(reapet)
     elif message != '':
         reapet_stream = llm_client(provider, model, api_key, message)
-        reapet_stream = reapet_stream.generate_stream()
-        for chunk in reapet_stream:
-            print(chunk['message']['content'], end='', flush=True)
+        reapet_stream.generate_stream_print()
     else:
         llm_chat(provider, model, api_key)

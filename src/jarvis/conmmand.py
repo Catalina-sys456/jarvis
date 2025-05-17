@@ -1,16 +1,22 @@
 from os import system
 from re import findall
 
-def conmmand(llm_feedback):
-    print(llm_feedback)
-    cutted_command = '\n'
+def cut_command(llm_feedback):
+    cuttied_conmmand = '\n'
+    if 'bash' in llm_feedback:
+        cuttied_conmmand = findall(r"bash\n(.*?)\n", llm_feedback)
+        return cuttied_conmmand
     if '$' in llm_feedback:
-        cutted_command = findall(r"\$(.*?)\n", llm_feedback)
-    elif '`' in llm_feedback:
-        cutted_command = findall(r"```\n(.*?)\n```", llm_feedback)
+        cuttied_conmmand = findall(r"\$\n(.*?)\n", llm_feedback)
+        return cuttied_conmmand
+    if '```' in llm_feedback:
+        cuttied_conmmand = findall(r"\`\`\`\n(.*?)\n", llm_feedback)
+        return cuttied_conmmand
     else:
-        cutted_command = findall(r"bash\n(.*?)\n```", llm_feedback)
-    print(cutted_command)
+        return cuttied_conmmand
+
+def conmmand(llm_feedback):
+    cutted_command = cut_command(llm_feedback)
     for line in cutted_command:
         print(f'\n{line}')
         action = input('Implement the conmmand or show the entire text? [y/n/show]')
@@ -22,4 +28,3 @@ def conmmand(llm_feedback):
             implement_or_not = input('Implement the conmmand? [y/n]')
             if implement_or_not == 'y':
                 system(line)    
-
