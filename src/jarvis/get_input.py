@@ -3,7 +3,7 @@ from jarvis.read_config import open_file
 def get_args(provider, model):
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file_name", type = str, help = "send a file to llm")
-    parser.add_argument("-w", "--word", type = str, help = "ask llm a question")
+    parser.add_argument("-q", "--question", type = str, help = "ask llm a question")
     parser.add_argument("-p", "--provider", type = str, help = "change the provider")
     parser.add_argument("-m", "--model", type = str, help = "change a model")
     parser.add_argument("-c", "--command", type =str, help = "let llm gennerate commands")
@@ -19,6 +19,6 @@ def get_args(provider, model):
         message = args.command
     elif args.file_name:   
         message = open_file(args.file_name)
-    elif args.word:
+    elif args.question:
         message = args.word
     return model, message, command_or_not
