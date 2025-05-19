@@ -1,7 +1,3 @@
-#provider: Gemini
-#model: 
-#api_key: 
-
-#provider: ollama
-#model: 
-#api_key:
+provider: 
+model: 
+api_key: 
