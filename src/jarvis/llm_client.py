@@ -41,7 +41,9 @@ class llm_client:
     def llm_chat(self):
         while  True:
             try:
-                self.message = input('\n\n>>>\n\n ')
+                print('-' * 60)
+                self.message = input('>>> ')
+                print('-' * 60)
                 self.generate_stream_print()
             except EOFError:
                 break
