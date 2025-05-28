@@ -47,6 +47,7 @@ class llm_client:
                 self.generate_stream_print()
             except EOFError:
                 break
+            except 
 
     def generate_image(self):
         try:

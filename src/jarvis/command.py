@@ -7,10 +7,10 @@ def cut_command(llm_feedback):
         cuttied_command = findall(r"```bash\n(.*?)\n```", llm_feedback)
         return cuttied_command
     if '```$' in llm_feedback:
-        cuttied_conmmand = findall(r"```\$\n(.*?)\n```", llm_feedback)
+        cuttied_command = findall(r"```\$\n(.*?)\n```", llm_feedback)
         return cuttied_command
     if '```' in llm_feedback:
-        cuttied_conmmand = findall(r"```n(.*?)\n```", llm_feedback)
+        cuttied_command = findall(r"```n(.*?)\n```", llm_feedback)
         return cuttied_command
     else:
         return cuttied_command
